@@ -23,9 +23,9 @@ $this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionic
 <body class="hold-transition login-page">
 <?php  $this->beginBody() ?>
 <div class="login-box">
-    <!-- <div class="login-logo">
+    <div class="login-logo">
         <a href="<?=Yii::$app->homeUrl?>"><b>Admin</b>LTE</a>
-    </div> -->
+    </div>
     <!-- /.login-logo -->
 
     <?= $content ?>
