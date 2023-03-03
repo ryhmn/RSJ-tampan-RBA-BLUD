@@ -1,6 +1,7 @@
 <?php
 
 use app\models\User;
+use Codeception\PHPUnit\ResultPrinter\HTML as ResultPrinterHTML;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -10,36 +11,48 @@ use yii\grid\GridView;
 /** @var app\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Users';
+$this->title = 'Data User';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
+<div class="user-index px-2">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="d-flex mt-4">
+        <?= Html::a('Tambah User', ['create'], ['class' => 'btn btn-success align-self-start mr-3']) ?>
+        <div class="ml-auto justify-content-center">
+            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        'layout' => '{items} {pager}',
+        'rowOptions' => ['class' => 'text-capitalize'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            // 'user_id',
             'username',
             'password',
             'bidang.nama_bidang',
-            // 'auth_key',
-            // 'access_token',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'user_id' => $model->user_id]);
-                 }
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $url = Url::to(['update', 'user_id' => $model->user_id]);
+                        return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
+                            'title' => "Edit",
+                            'class' => 'btn btn-warning'
+                        ]);
+                    },
+                    'delete' => function ($url, $model) {
+                        $url = Url::to(['delete', 'user_id' => $model->user_id]);
+                        return Html::a('<i class="fas fa-trash-alt"></i>', $url, [
+                            'title' => "Hapus",
+                            'data-confirm' => Yii::t('yii', 'Ingin menghapus data?'),
+                            'data-method' => 'post',
+                            'class' => 'btn btn-danger ml-1'
+                        ]);
+                    }
+                ],
             ],
         ],
     ]); ?>

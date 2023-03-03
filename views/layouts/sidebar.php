@@ -13,7 +13,7 @@
                 <img src="<?= $assetDir ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block text-capitalize"><?php echo Yii::$app->user->identity->username ?></a>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
 
-                    ['label' => 'Dashboard', 'icon' => 'fas fa-home'],
+                    ['label' => 'Dashboard', 'icon' => 'fas fa-home', 'url' => ['site/index']],
                     ['label' => 'Perencanaan', 'header' => true],
                     [
                         'label' => 'Perencanaan',
@@ -66,9 +66,11 @@
 
                     ],
                     ['label' => 'Admin', 'header' => true],
-                    ['label' => 'Tambah User',  'icon' => 'fas fa-user-plus', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Tambah Bidang',  'icon' => 'fad fa-address-card', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Tambah Satuan',  'icon' => 'fas fa-list-alt', 'url' => ['/gii'], 'target' => '_blank'],
+                    ['label' => 'Data User',  'icon' => 'fas fa-user-plus', 'url' => ['user/index']],
+                    ['label' => 'Data Bidang',  'icon' => 'fad fa-address-card', 'url' => ['bidang/index']],
+                    ['label' => 'Data Satuan',  'icon' => 'fas fa-list-alt', 'url' => ['satuan/index']],
+                    ['label' => 'Data item',  'icon' => 'fas fa-tablets', 'url' => ['item/index']],
+                    ['label' => 'Data Jenis Belanja',  'icon' => 'fas fa-tag', 'url' => ['jbelanja/index']],
                     // ['label' => 'Yii2 PROVIDED', 'header' => true],
                     // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     // ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],

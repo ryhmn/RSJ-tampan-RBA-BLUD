@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Bidang;
+use app\models\Item;
 
 /**
- * BidangSearch represents the model behind the search form of `app\models\Bidang`.
+ * ItemSearch represents the model behind the search form of `app\models\Item`.
  */
-class BidangSearch extends Bidang
+class ItemSearch extends Item
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class BidangSearch extends Bidang
     public function rules()
     {
         return [
-            // [['bidang_id'], 'integer'],
-            [['nama_bidang'], 'safe'],
+            [['item_id'], 'integer'],
+            [['nama_item'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class BidangSearch extends Bidang
      */
     public function search($params)
     {
-        $query = Bidang::find();
+        $query = Item::find();
 
         // add conditions that should always apply here
 
@@ -58,10 +58,10 @@ class BidangSearch extends Bidang
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'bidang_id' => $this->bidang_id
+            'item_id' => $this->item_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nama_bidang', $this->nama_bidang]);
+        $query->andFilterWhere(['like', 'nama_item', $this->nama_item]);
 
         return $dataProvider;
     }

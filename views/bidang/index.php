@@ -10,35 +10,48 @@ use yii\grid\GridView;
 /** @var app\models\BidangSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Bidangs';
+$this->title = 'Data Bidang';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bidang-index">
+<div class="bidang-index px-2">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Bidang', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="d-flex mt-4">
+        <?= Html::a('Tambah Bidang', ['create'], ['class' => 'btn btn-success align-self-start mr-3']) ?>
+        <div class="ml-auto justify-content-center">
+            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        'layout' => '{items} {pager}',
+        'rowOptions' => ['class' => 'text-capitalize'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'bidang_id',
             'nama_bidang',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Bidang $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'bidang_id' => $model->bidang_id]);
-                 }
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function($url, $model) {
+                        $url = Url::to(['update', 'bidang_id' => $model->bidang_id]);
+                        return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
+                            'title' => "Edit",
+                            'class' => 'btn btn-warning'
+                        ]);
+                    },
+                    'delete' => function($url, $model) {
+                        $url = Url::to(['delete', 'bidang_id' => $model->bidang_id]);
+                        return Html::a('<i class="fas fa-trash-alt"></i>', $url, [
+                            'title' => "Hapus",
+                            'data-confirm' => Yii::t('yii', 'Ingin menghapus data?'),
+                            'data-method' => 'post',
+                            'class' => 'btn btn-danger ml-1'
+                        ]);
+                    }
+                ],
             ],
         ],
     ]); ?>
-
 
 </div>

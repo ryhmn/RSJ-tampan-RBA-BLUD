@@ -15,21 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'user_id') ?>
-
-    <?= $form->field($model, 'username') ?>
-
-    <?= $form->field($model, 'password') ?>
-
-    <?= $form->field($model, 'bidang_id') ?>
-
-    <?= $form->field($model, 'auth_key') ?>
-
-    <?php // echo $form->field($model, 'access_token') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="input-group d-flex">
+        <?= $form->field($model, 'username')->textInput(['placeholder' => "Cari Nama Bidang",'class' => 'border rounded-left h-100 px-3'])->label(false) ?>
+        <div class="form-group input-group-append align-center">
+            <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'btn btn-secondary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

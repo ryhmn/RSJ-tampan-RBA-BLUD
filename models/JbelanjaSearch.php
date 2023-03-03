@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Bidang;
+use app\models\Jbelanja;
 
 /**
- * BidangSearch represents the model behind the search form of `app\models\Bidang`.
+ * JbelanjaSearch represents the model behind the search form of `app\models\Jbelanja`.
  */
-class BidangSearch extends Bidang
+class JbelanjaSearch extends Jbelanja
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class BidangSearch extends Bidang
     public function rules()
     {
         return [
-            // [['bidang_id'], 'integer'],
-            [['nama_bidang'], 'safe'],
+            [['jenis_belanja_id', 'parent_jenis_belanja_id'], 'integer'],
+            [['jenis_belanja'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class BidangSearch extends Bidang
      */
     public function search($params)
     {
-        $query = Bidang::find();
+        $query = Jbelanja::find();
 
         // add conditions that should always apply here
 
@@ -58,10 +58,11 @@ class BidangSearch extends Bidang
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'bidang_id' => $this->bidang_id
+            'jenis_belanja_id' => $this->jenis_belanja_id,
+            'parent_jenis_belanja_id' => $this->parent_jenis_belanja_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nama_bidang', $this->nama_bidang]);
+        $query->andFilterWhere(['like', 'jenis_belanja', $this->jenis_belanja]);
 
         return $dataProvider;
     }
