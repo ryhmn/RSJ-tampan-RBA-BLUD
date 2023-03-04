@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="belanja-index px-2">
 
     <div class="d-flex mt-4">
-        <?= Html::a('Tambah Belanja', ['create'], ['class' => 'btn btn-success align-self-start mr-3']) ?>
+        <?= Html::a('Tambah Pagu Indikatif', ['create'], ['class' => 'btn btn-success align-self-start mr-3']) ?>
         <div class="ml-auto justify-content-center">
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
@@ -28,9 +28,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'rowOptions' => ['class' => 'text-capitalize'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'rba_id',
-            'jenis_belanja_id',
-            'pagu_indikatif',
+            [
+                'header' => 'Tahun RBA',
+                'value' => 'rba.rba_tahun'
+            ],
+            'jbelanja.jenis_belanja',
+            [   
+                'header' => 'Pagu Indikatif',
+                'value' => function($model) {
+                    $pagu = $model->pagu_indikatif;
+                    $pagu_f = number_format($pagu, '2', ',', '.');
+                    return $pagu_f;
+                }
+            ],
             [
                 'class' => ActionColumn::className(),
                 'template' => '{update} {delete}',

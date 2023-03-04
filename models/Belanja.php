@@ -12,7 +12,7 @@ use Yii;
  * @property int $jenis_belanja_id
  * @property float $pagu_indikatif
  *
- * @property JenisBelanja $jenisBelanja
+ * @property Jbelanja $Jbelanja
  * @property Rba $rba
  */
 class Belanja extends \yii\db\ActiveRecord
@@ -35,7 +35,7 @@ class Belanja extends \yii\db\ActiveRecord
             [['rba_id', 'jenis_belanja_id'], 'integer'],
             [['pagu_indikatif'], 'number'],
             [['rba_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rba::class, 'targetAttribute' => ['rba_id' => 'rba_id']],
-            [['jenis_belanja_id'], 'exist', 'skipOnError' => true, 'targetClass' => JenisBelanja::class, 'targetAttribute' => ['jenis_belanja_id' => 'jenis_belanja_id']],
+            [['jenis_belanja_id'], 'exist', 'skipOnError' => true, 'targetClass' => Jbelanja::class, 'targetAttribute' => ['jenis_belanja_id' => 'jenis_belanja_id']],
         ];
     }
 
@@ -53,13 +53,13 @@ class Belanja extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[JenisBelanja]].
+     * Gets query for [[Jbelanja]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getJenisBelanja()
+    public function getJbelanja()
     {
-        return $this->hasOne(JenisBelanja::class, ['jenis_belanja_id' => 'jenis_belanja_id']);
+        return $this->hasOne(Jbelanja::class, ['jenis_belanja_id' => 'jenis_belanja_id']);
     }
 
     /**

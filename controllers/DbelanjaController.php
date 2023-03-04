@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\User;
-use app\models\UserSearch;
+use app\models\Dbelanja;
+use app\models\DbelanjaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * DbelanjaController implements the CRUD actions for Dbelanja model.
  */
-class UserController extends Controller
+class DbelanjaController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Dbelanja models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new DbelanjaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
-     * @param int $user_id User ID
+     * Displays a single Dbelanja model.
+     * @param int $detail_belanja_id Detail Belanja ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($user_id)
+    public function actionView($detail_belanja_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($user_id),
+            'model' => $this->findModel($detail_belanja_id),
         ]);
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Dbelanja model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Dbelanja();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->createUser()) {
-                return $this->redirect(['view', 'user_id' => $model->user_id]);
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'detail_belanja_id' => $model->detail_belanja_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -83,18 +83,18 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Dbelanja model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $user_id User ID
+     * @param int $detail_belanja_id Detail Belanja ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($user_id)
+    public function actionUpdate($detail_belanja_id)
     {
-        $model = $this->findModel($user_id);
+        $model = $this->findModel($detail_belanja_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateUser()) {
-            return $this->redirect(['view', 'user_id' => $model->user_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'detail_belanja_id' => $model->detail_belanja_id]);
         }
 
         return $this->render('update', [
@@ -103,29 +103,29 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Dbelanja model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $user_id User ID
+     * @param int $detail_belanja_id Detail Belanja ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($user_id)
+    public function actionDelete($detail_belanja_id)
     {
-        $this->findModel($user_id)->delete();
+        $this->findModel($detail_belanja_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Dbelanja model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $user_id User ID
-     * @return User the loaded model
+     * @param int $detail_belanja_id Detail Belanja ID
+     * @return Dbelanja the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($user_id)
+    protected function findModel($detail_belanja_id)
     {
-        if (($model = User::findOne(['user_id' => $user_id])) !== null) {
+        if (($model = Dbelanja::findOne(['detail_belanja_id' => $detail_belanja_id])) !== null) {
             return $model;
         }
 

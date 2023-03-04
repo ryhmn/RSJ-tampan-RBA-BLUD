@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed" style="overflow-y: auto; bottom: 0; top: 0;">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
         <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -31,7 +31,7 @@
         </div> -->
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-2 mb-5">
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
@@ -44,7 +44,7 @@
                         'items' => [
                             ['label' => 'Pegeseran',],
                             ['label' => 'Pagu Indikatif', 'url' => ['belanja/index']],
-                            ['label' => 'Belanja',],
+                            ['label' => 'Belanja', 'url' => ['dbelanja/index']],
                         ]
                     ],
                     ['label' => 'Keuangan', 'header' => true],
@@ -53,7 +53,8 @@
                         'icon' => 'fas fa-dollar-sign',
                         'items' => [
                             ['label' => 'Pendapatan', 'url' => ['pendapatan/index']],
-                            ['label' => 'Belanja',],
+                            // ['label' => 'Belanja', 'url' => ['dbelanja/index']],
+                            ['label' => 'Belanja'],
                         ]
 
                     ],
@@ -62,7 +63,8 @@
                         'label' => 'Bidang',
                         'icon' => 'fad fa-book-open',
                         'items' => [
-                            ['label' => 'Belanja',],
+                            // ['label' => 'Belanja', 'url' => ['dbelanja/index']],
+                            ['label' => 'Belanja'],
                         ]
 
                     ],

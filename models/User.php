@@ -157,4 +157,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         \Yii::error("User wasn't saved. ", VarDumper::dumpAsString($this->errors));
         return false;
     }
+
+    public function updateUser()
+    {
+        $this->password = \Yii::$app->security->generatePasswordHash($this->password);
+
+        if ($this->save()) {
+            return true;
+        }
+
+        \Yii::error("User wasn't updated. ", VarDumper::dumpAsString($this->errors));
+        return false;
+    }
 }

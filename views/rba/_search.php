@@ -15,13 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'rba_id') ?>
-
-    <?= $form->field($model, 'rba_tahun') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="input-group d-flex">
+        <?= $form->field($model, 'rba_tahun')->textInput(['placeholder' => "Cari RBA",'class' => 'border rounded-left h-100 px-3'])->label(false) ?>
+        <div class="form-group input-group-append align-self-center">
+            <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'btn btn-secondary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

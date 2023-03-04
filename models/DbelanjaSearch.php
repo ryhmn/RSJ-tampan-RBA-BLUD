@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\JenisBelanja;
+use app\models\Dbelanja;
 
 /**
- * JenisBelanjaSearch represents the model behind the search form of `app\models\JenisBelanja`.
+ * DbelanjaSearch represents the model behind the search form of `app\models\Dbelanja`.
  */
-class JenisBelanjaSearch extends JenisBelanja
+class DbelanjaSearch extends Dbelanja
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class JenisBelanjaSearch extends JenisBelanja
     public function rules()
     {
         return [
-            [['jenis_belanja_id', 'parent_jenis_belanja_id'], 'integer'],
-            [['jenis_belanja'], 'safe'],
+            [['detail_belanja_id', 'user_id', 'belanja_id', 'item_id', 'jumlah_belanja', 'satuan_id'], 'integer'],
+            [['harga_satuan'], 'number'],
         ];
     }
 
@@ -40,7 +40,7 @@ class JenisBelanjaSearch extends JenisBelanja
      */
     public function search($params)
     {
-        $query = JenisBelanja::find();
+        $query = Dbelanja::find();
 
         // add conditions that should always apply here
 
@@ -58,11 +58,14 @@ class JenisBelanjaSearch extends JenisBelanja
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'jenis_belanja_id' => $this->jenis_belanja_id,
-            'parent_jenis_belanja_id' => $this->parent_jenis_belanja_id,
+            'detail_belanja_id' => $this->detail_belanja_id,
+            'user_id' => $this->user_id,
+            'belanja_id' => $this->belanja_id,
+            'item_id' => $this->item_id,
+            'jumlah_belanja' => $this->jumlah_belanja,
+            'satuan_id' => $this->satuan_id,
+            'harga_satuan' => $this->harga_satuan,
         ]);
-
-        $query->andFilterWhere(['like', 'jenis_belanja', $this->jenis_belanja]);
 
         return $dataProvider;
     }
