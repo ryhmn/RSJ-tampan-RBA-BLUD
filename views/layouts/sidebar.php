@@ -43,7 +43,7 @@
                         'icon' => 'fad fa-asterisk',
                         'items' => [
                             ['label' => 'Pegeseran',],
-                            ['label' => 'Pagu Indikatif',],
+                            ['label' => 'Pagu Indikatif', 'url' => ['belanja/index']],
                             ['label' => 'Belanja',],
                         ]
                     ],
@@ -72,7 +72,7 @@
                     ['label' => 'Data Satuan',  'icon' => 'fas fa-list-alt', 'url' => ['satuan/index']],
                     ['label' => 'Data item',  'icon' => 'fas fa-tablets', 'url' => ['item/index']],
                     ['label' => 'Data Jenis Belanja',  'icon' => 'fas fa-tag', 'url' => ['jbelanja/index']],
-                    ['label' => 'RBA',  'icon' => 'fas fa-tag',],
+                    ['label' => 'RBA',  'icon' => 'fas fa-tag', 'url' => ['rba/index']],
                     // ['label' => 'Yii2 PROVIDED', 'header' => true],
                     // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     // ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
