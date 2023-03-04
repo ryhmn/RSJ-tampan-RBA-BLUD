@@ -43,6 +43,7 @@
                         'icon' => 'fad fa-asterisk',
                         'items' => [
                             ['label' => 'Pegeseran', 'iconStyle' => 'far'],
+                            ['label' => 'Pagu Indikatif', 'iconStyle' => 'far'],
                             ['label' => 'Belanja', 'iconStyle' => 'far'],
                         ]
                     ],
