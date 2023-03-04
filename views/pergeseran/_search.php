@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\PendapatanSearch $model */
+/** @var app\models\PergeseranSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="pendapatan-search">
+<div class="pergeseran-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -16,13 +16,11 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="input-group d-flex">
-        <?= $form->field($model, 'sumber_pendapatan')->textInput(['placeholder' => "Cari sumber pendapatan", 'class' => 'border rounded-left h-100 px-3'])->label(false) ?>
-        <div class="form-group input-group-append align-self-center">
+        <?= $form->field($model, 'tanggal_pergeseran')->textInput(['placeholder' => "Cari Tanggal Pergeseran", 'class' => 'border rounded-left h-100 px-3'])->label(false) ?>
+        <div class="form-group">
             <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
-
-
     <?php ActiveForm::end(); ?>
 
 </div>
