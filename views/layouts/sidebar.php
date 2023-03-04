@@ -42,9 +42,9 @@
                         'label' => 'Perencanaan',
                         'icon' => 'fad fa-asterisk',
                         'items' => [
-                            ['label' => 'Pegeseran', 'iconStyle' => 'far'],
-                            ['label' => 'Pagu Indikatif', 'iconStyle' => 'far'],
-                            ['label' => 'Belanja', 'iconStyle' => 'far'],
+                            ['label' => 'Pegeseran',],
+                            ['label' => 'Pagu Indikatif',],
+                            ['label' => 'Belanja',],
                         ]
                     ],
                     ['label' => 'Keuangan', 'header' => true],
@@ -52,8 +52,8 @@
                         'label' => 'Keuangan',
                         'icon' => 'fas fa-dollar-sign',
                         'items' => [
-                            ['label' => 'Pendapatan', 'iconStyle' => 'far'],
-                            ['label' => 'Belanja', 'iconStyle' => 'far'],
+                            ['label' => 'Pendapatan', 'url' => ['pendapatan/index']],
+                            ['label' => 'Belanja',],
                         ]
 
                     ],
@@ -62,7 +62,7 @@
                         'label' => 'Bidang',
                         'icon' => 'fad fa-book-open',
                         'items' => [
-                            ['label' => 'Belanja', 'iconStyle' => 'far'],
+                            ['label' => 'Belanja',],
                         ]
 
                     ],
@@ -72,6 +72,7 @@
                     ['label' => 'Data Satuan',  'icon' => 'fas fa-list-alt', 'url' => ['satuan/index']],
                     ['label' => 'Data item',  'icon' => 'fas fa-tablets', 'url' => ['item/index']],
                     ['label' => 'Data Jenis Belanja',  'icon' => 'fas fa-tag', 'url' => ['jbelanja/index']],
+                    ['label' => 'RBA',  'icon' => 'fas fa-tag',],
                     // ['label' => 'Yii2 PROVIDED', 'header' => true],
                     // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     // ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
