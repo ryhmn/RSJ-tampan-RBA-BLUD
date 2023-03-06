@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'rowOptions' => ['class' => 'text-capitalize'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'Tahun RBA',
             'parent_pendapatan_id',
             'sumber_pendapatan',
             'jumlah_pendapatan',

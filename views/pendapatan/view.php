@@ -6,21 +6,19 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Pendapatan $model */
 
-$this->title = $model->pendapatan_id;
-$this->params['breadcrumbs'][] = ['label' => 'Pendapatans', 'url' => ['index']];
+$this->title = 'Data Berhasil di Input';
+$this->params['breadcrumbs'][] = ['label' => 'Pendapatan', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="pendapatan-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'pendapatan_id' => $model->pendapatan_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'pendapatan_id' => $model->pendapatan_id], [
+        <?= Html::a('Perbarui', ['update', 'pendapatan_id' => $model->pendapatan_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Hapus', ['delete', 'pendapatan_id' => $model->pendapatan_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Kamu yakin ingin menghapus data ini?',
                 'method' => 'post',
             ],
         ]) ?>

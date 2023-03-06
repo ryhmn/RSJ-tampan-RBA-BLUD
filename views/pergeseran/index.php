@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'rowOptions' => ['class' => 'text-capitalize'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'rba_id',
             'tanggal_pergeseran',
             'keterangan:ntext',
             'status',

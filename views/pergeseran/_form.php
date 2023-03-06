@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
+use app\models\Rba;
 
 /** @var yii\web\View $this */
 /** @var app\models\Pergeseran $model */
@@ -13,7 +15,15 @@ use kartik\date\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rba_id')->textInput() ?>
+    <?php
+    $rba = Rba::find()->all();
+    echo $form->field($model, 'rba_id')->dropDownList(
+        ArrayHelper::map($rba, 'rba_id', function ($rba) {
+            return $rba->rba_tahun;
+        }),
+        ['prompt' => 'Pilih Tahun RBA']
+    );
+    ?>
 
     <?=
     $form->field($model, 'tanggal_pergeseran')->widget(DatePicker::classname(), [
