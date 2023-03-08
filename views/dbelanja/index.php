@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -45,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'satuan.nama_satuan',
             [
                 'header' => 'Harga Satuan',
-                'value' => function($model) {
+                'value' => function ($model) {
                     $harga = $model->harga_satuan;
                     $harga_f = number_format($harga, '2', ',', '.');
                     return $harga_f;
@@ -55,14 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'template' => '{update} {delete}',
                 'buttons' => [
-                    'update' => function($url, $model) {
+                    'update' => function ($url, $model) {
                         $url = Url::to(['update', 'detail_belanja_id' => $model->detail_belanja_id]);
                         return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
                             'title' => "Edit",
                             'class' => 'btn btn-warning'
                         ]);
                     },
-                    'delete' => function($url, $model) {
+                    'delete' => function ($url, $model) {
                         $url = Url::to(['delete', 'detail_belanja_id' => $model->detail_belanja_id]);
                         return Html::a('<i class="fas fa-trash-alt"></i>', $url, [
                             'title' => "Hapus",
