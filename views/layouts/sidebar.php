@@ -1,8 +1,16 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed" style="overflow-y: auto; bottom: 0; top: 0;">
+<?php
+
+use yii\helpers\Html;
+
+?>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed" style="overflow-y: none; bottom: 0; top: 0;">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">RSJ Tampan</span>
+    <a href="index3.html" class="brand-link text-center">
+        <?= Html::img('@web/images/rsj_logo.png', ['alt' => "Rumah Sakit Jiwa Tampan", 'style' => 'width: 15%; height: 2.5rem;'])?>
+        <span class="brand-text font-weight-bolder">APLIKASI RBA BLUD</span>
+        <!-- <br>
+        <span class="brand-text font-weight-light font-size-small">RSJ Tampan</span> -->
     </a>
 
     <!-- Sidebar -->
@@ -43,6 +51,7 @@
                         'icon' => 'fad fa-asterisk',
                         'items' => [
                             ['label' => 'Pergeseran', 'url' => ['pergeseran/index']],
+                            ['label' => 'Detail Pergeseran', 'url' => ['dpergeseran/index']],
                             ['label' => 'Pagu Indikatif', 'url' => ['belanja/index']],
                             ['label' => 'Belanja', 'url' => ['dbelanja/index']],
                         ]

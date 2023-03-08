@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "pergeseran".
@@ -25,6 +27,22 @@ class Pergeseran extends \yii\db\ActiveRecord
     {
         return 'pergeseran';
     }
+
+    // public function behaviors()
+    // {
+    //     return [
+    //         [
+    //             'class' => AttributeBehavior::className(),
+    //             'attributes' => [
+    //                 ActiveRecord::EVENT_BEFORE_INSERT => ['created', 'updated'],
+    //                 ActiveRecord::EVENT_BEFORE_UPDATE => 'updated'
+    //             ],
+    //             'value' => function($event) {
+    //                 return date('Y/m/d');
+    //             }
+    //         ],
+    //     ];
+    // }
 
     /**
      * {@inheritdoc}

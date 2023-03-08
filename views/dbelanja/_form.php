@@ -22,8 +22,11 @@ use yii\widgets\ActiveForm;
     <!-- <?= $form->field($model, 'belanja_id')->textInput() ?> -->
     <?php
         $belanja = Belanja::find()->all();
-        echo $form->field($model, 'belanja_id')->dropDownList(ArrayHelper::map($belanja, 'belanja_id', function($belanja){return $belanja->jenis_belanja_id;}), 
-            ['prompt' => 'Pilih Belanja']);
+        echo $form->field($model, 'belanja_id')->dropDownList(ArrayHelper::map($belanja, 'belanja_id', 
+            function($belanja){
+                $jbelanja = Jbelanja::find()->where(['jenis_belanja_id'=>$belanja->jenis_belanja_id])->one();
+                return $jbelanja->jenis_belanja;
+            }), ['prompt' => 'Pilih Belanja']);
     ?>
 
     <!-- <?= $form->field($model, 'item_id')->textInput() ?> -->

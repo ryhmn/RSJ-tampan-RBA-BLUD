@@ -15,6 +15,7 @@ use Yii;
  * @property int $satuan_id
  * @property float $harga_satuan
  *
+ * @property Belanja $belanja
  * @property DetailPergeseran[] $detailPergeserans
  * @property Item $item
  * @property Satuan $satuan
@@ -42,6 +43,7 @@ class Dbelanja extends \yii\db\ActiveRecord
             [['satuan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Satuan::class, 'targetAttribute' => ['satuan_id' => 'satuan_id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::class, 'targetAttribute' => ['item_id' => 'item_id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'user_id']],
+            [['belanja_id'], 'exist', 'skipOnError' => true, 'targetClass' => Belanja::class, 'targetAttribute' => ['belanja_id' => 'belanja_id']],
         ];
     }
 
@@ -57,8 +59,18 @@ class Dbelanja extends \yii\db\ActiveRecord
             'item_id' => 'Item ID',
             'jumlah_belanja' => 'Jumlah Belanja',
             'satuan_id' => 'Satuan ID',
-            'harga_satuan' => 'Harga Belanja',
+            'harga_satuan' => 'Harga Satuan',
         ];
+    }
+
+    /**
+     * Gets query for [[Belanja]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBelanja()
+    {
+        return $this->hasOne(Belanja::class, ['belanja_id' => 'belanja_id']);
     }
 
     /**

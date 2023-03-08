@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\User;
-use app\models\UserSearch;
+use app\models\Dpergeseran;
+use app\models\DpergeseranSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * DpergeseranController implements the CRUD actions for Dpergeseran model.
  */
-class UserController extends Controller
+class DpergeseranController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Dpergeseran models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new DpergeseranSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
-     * @param int $user_id User ID
+     * Displays a single Dpergeseran model.
+     * @param int $detail_pergeseran_id Detail Pergeseran ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($user_id)
+    public function actionView($detail_pergeseran_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($user_id),
+            'model' => $this->findModel($detail_pergeseran_id),
         ]);
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Dpergeseran model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Dpergeseran();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->createUser()) {
-                return $this->redirect(['view', 'user_id' => $model->user_id]);
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'detail_pergeseran_id' => $model->detail_pergeseran_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -83,19 +83,18 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Dpergeseran model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $user_id User ID
+     * @param int $detail_pergeseran_id Detail Pergeseran ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($user_id)
+    public function actionUpdate($detail_pergeseran_id)
     {
-        $model = $this->findModel($user_id);
+        $model = $this->findModel($detail_pergeseran_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateUser()) {
-            // return $this->redirect(['view', 'user_id' => $model->user_id]);
-            return $this->redirect(['index']);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'detail_pergeseran_id' => $model->detail_pergeseran_id]);
         }
 
         return $this->render('update', [
@@ -104,29 +103,29 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Dpergeseran model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $user_id User ID
+     * @param int $detail_pergeseran_id Detail Pergeseran ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($user_id)
+    public function actionDelete($detail_pergeseran_id)
     {
-        $this->findModel($user_id)->delete();
+        $this->findModel($detail_pergeseran_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Dpergeseran model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $user_id User ID
-     * @return User the loaded model
+     * @param int $detail_pergeseran_id Detail Pergeseran ID
+     * @return Dpergeseran the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($user_id)
+    protected function findModel($detail_pergeseran_id)
     {
-        if (($model = User::findOne(['user_id' => $user_id])) !== null) {
+        if (($model = Dpergeseran::findOne(['detail_pergeseran_id' => $detail_pergeseran_id])) !== null) {
             return $model;
         }
 
