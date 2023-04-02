@@ -50,10 +50,10 @@
                         'label' => 'Perencanaan',
                         'icon' => 'tasks',
                         'items' => [
-                            ['label' => 'Pergeseran', 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Detail Pergeseran', 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Pagu Indikatif', 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Belanja', 'icon' => 'chevron-circle-right']
+                            ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'chevron-circle-right'],
+                            ['label' => 'Detail Pergeseran', 'url' => ['/detail-pergeseran/index'], 'icon' => 'chevron-circle-right'],
+                            ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'chevron-circle-right'],
+                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'chevron-circle-right']
                         ]
                     ],
 
@@ -62,8 +62,8 @@
                         'label' => 'Keuangan',
                         'icon' => 'hand-holding-usd',
                         'items' => [
-                            ['label' => 'Pendapatan', 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Belanja', 'icon' => 'chevron-circle-right']
+                            ['label' => 'Pendapatan', 'url' => ['/pendapatan/index'], 'icon' => 'chevron-circle-right'],
+                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'chevron-circle-right']
                         ]
                     ],
                     
@@ -72,7 +72,7 @@
                         'label' => 'Bidang',
                         'icon' => 'sitemap',
                         'items' => [
-                            ['label' => 'Belanja', 'icon' => 'chevron-circle-right']
+                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'chevron-circle-right']
                         ]
                     ],
 
