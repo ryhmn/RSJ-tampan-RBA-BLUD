@@ -1,19 +1,22 @@
 <?php
 use yii\helpers\Html;
 ?>
+
 <div class="card" style="box-shadow: none;">
     <div class="card-body login-card-body">
-        <p class="login-box-msg text-left pl-0 mb-3">Silakan login ke dalam akun anda</p>
+        <div class="login-logo text-left mb-0">
+            <a href="javascript:void(0)" class="font-weight-bold">RBA BLUD</a>
+        </div>
+        <p class="login-box-msg text-left pl-0 mb-4">Selamat datang di aplikasi <b>Rencana Belanja Anggaran RSJ Tampan</b>, silakan login ke dalam akun anda.</p>
 
         <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
 
         <?= $form->field($model, 'username', [
             'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text rounded-right"><span class="fas fa-envelope"></span></div></div>',
+            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text rounded-right"><span class="fas fa-user"></span></div></div>',
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])
-            ->label(false)
             ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
 
         <?= $form->field($model,'password', [
@@ -22,7 +25,6 @@ use yii\helpers\Html;
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])
-            ->label(false)
             ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
         <div class="row">

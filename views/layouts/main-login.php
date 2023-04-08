@@ -29,14 +29,11 @@ use yii\helpers\Html;
     <?php $this->beginBody() ?>
     <div class="row mx-auto" style="height: 100vh">
         <div class="col-7 p-3 d-flex">
+            <?= Html::img('@web/images/rsj_text_logo.png', ['alt' => 'Logo RSJ Tampan', 'class' => 'position-absolute m-2 bg-white p-2 rounded', 'style' => 'height: 45px;'])?>
             <?= Html::img('@web/images/rsj_tampan.jpg', ['alt' => "Rumah Sakit Jiwa Tampan", 'class' => 'mw-100 rounded justify-content-center'])?>
         </div>
         <div class="col-5 p-3 d-flex">
-            <?= Html::img('@web/images/rsj_text_logo.png', ['alt' => 'Logo RSJ Tampan', 'class' => 'position-absolute m-2', 'style' => 'height: 4.5%;'])?>
-            <div class="login-box mx-auto justify-content-center align-self-center">
-                <div class="login-logo mb-3">
-                    <a href="javascript:void(0)"><b>RBA </b>BLUD</a>
-                </div>
+            <div class="login-box mx-auto justify-content-center align-self-center mb-5">
                 <!-- /.login-logo -->
 
                 <?= $content ?>

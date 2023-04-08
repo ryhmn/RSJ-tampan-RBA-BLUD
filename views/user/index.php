@@ -13,6 +13,7 @@ use yii\grid\GridView;
 $this->title = 'Data User';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="user-index px-3">
     <div class="card">
         <div class="card-body">
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::encode($this->title); ?>
                 </h4>
                 <p class="ml-auto my-auto">
-                    <?= Html::a('<i class="fas fa-plus mr-1"></i> Tambah User', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('<i class="fas fa-plus mr-1"></i> Tambah User', ['create'], ['class' => 'btn btn-success']); ?>
                 </p>
                 <?php echo $this->render('_search', ['model' => $searchModel]); ?>
             </div>

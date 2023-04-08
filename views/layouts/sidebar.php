@@ -50,10 +50,10 @@
                         'label' => 'Perencanaan',
                         'icon' => 'tasks',
                         'items' => [
-                            ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Detail Pergeseran', 'url' => ['/detail-pergeseran/index'], 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'chevron-circle-right']
+                            ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'angle-right'],
+                            ['label' => 'Detail Pergeseran', 'url' => ['/detail-pergeseran/index'], 'icon' => 'angle-right'],
+                            ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'angle-right'],
+                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
                         ]
                     ],
 
@@ -62,8 +62,8 @@
                         'label' => 'Keuangan',
                         'icon' => 'hand-holding-usd',
                         'items' => [
-                            ['label' => 'Pendapatan', 'url' => ['/pendapatan/index'], 'icon' => 'chevron-circle-right'],
-                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'chevron-circle-right']
+                            ['label' => 'Pendapatan', 'url' => ['/pendapatan/index'], 'icon' => 'angle-right'],
+                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
                         ]
                     ],
                     
@@ -72,7 +72,7 @@
                         'label' => 'Bidang',
                         'icon' => 'sitemap',
                         'items' => [
-                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'chevron-circle-right']
+                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
                         ]
                     ],
 
