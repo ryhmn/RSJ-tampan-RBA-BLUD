@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Detail Pergeserans', 'url' => ['in
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-
 <div class="detail-pergeseran-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

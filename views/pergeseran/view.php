@@ -7,10 +7,9 @@ use yii\widgets\DetailView;
 /** @var app\models\Pergeseran $model */
 
 $this->title = $model->pergeseran_id;
-$this->params['breadcrumbs'][] = ['label' => 'Pergeserans', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
 <div class="pergeseran-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

@@ -34,7 +34,7 @@ class DetailPergeseran extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pergeseran_id', 'detail_belanja_id', 'harga_belanja', 'jumlah_belanja', 'satuan_id'], 'required'],
+            [['harga_belanja', 'jumlah_belanja', 'satuan_id'], 'required'],
             [['pergeseran_id', 'detail_belanja_id', 'jumlah_belanja', 'satuan_id'], 'integer'],
             [['harga_belanja'], 'number'],
             [['satuan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Satuan::class, 'targetAttribute' => ['satuan_id' => 'satuan_id']],

@@ -2,8 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\DetailPergeseran;
+use app\models\Model;
 use app\models\Pergeseran;
 use app\models\PergeseranSearch;
+use Exception;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -68,17 +72,41 @@ class PergeseranController extends Controller
     public function actionCreate()
     {
         $model = new Pergeseran();
+        $modelsDetailPergeseran = [new DetailPergeseran()];
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'pergeseran_id' => $model->pergeseran_id]);
+        if ($model->load($this->request->post()) && $model->save()) {
+            $modelsDetailPergeseran = Model::createMultiple(DetailPergeseran::classname());
+            Model::loadMultiple($modelsDetailPergeseran, Yii::$app->request->post());
+
+        // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsDetailPergeseran) && $valid;
+            
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($modelsDetailPergeseran as $modelDetailPergeseran) {
+                            $modelDetailPergeseran->pergeseran_id = $model->pergeseran_id;
+                            if (! ($flag = $modelDetailPergeseran->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['pergeseran/index']);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
-
+        
         return $this->render('create', [
             'model' => $model,
+            'modelsDetailPergeseran' => (empty($modelsDetailPergeseran)) ? [new DetailPergeseran()] : $modelsDetailPergeseran
         ]);
     }
 

@@ -23,7 +23,7 @@
         "yiisoft/yii2-bootstrap4": "^2.0",
         "kartik-v/yii2-widget-activeform": "dev-master",
         "kartik-v/yii2-widget-datepicker": "dev-master",
-        "wbraganca/yii2-dynamicform": "*"
+        "wbraganca/yii2-dynamicform": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
