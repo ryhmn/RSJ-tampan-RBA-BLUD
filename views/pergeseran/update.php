@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = 'Edit Pergeseran';
             </div>
             <?= $this->render('_form', [
                 'model' => $model,
+                'modelsDetailPergeseran' => $modelsDetailPergeseran
             ]) ?>
         </div>
     </div>

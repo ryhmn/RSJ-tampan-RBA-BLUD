@@ -11,6 +11,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * PergeseranController implements the CRUD actions for Pergeseran model.
@@ -106,7 +107,7 @@ class PergeseranController extends Controller
         
         return $this->render('create', [
             'model' => $model,
-            'modelsDetailPergeseran' => (empty($modelsDetailPergeseran)) ? [new DetailPergeseran()] : $modelsDetailPergeseran
+            'modelsDetailPergeseran' => (empty($modelsDetailPergeseran)) ? [new DetailPergeseran] : $modelsDetailPergeseran
         ]);
     }
 
@@ -120,13 +121,46 @@ class PergeseranController extends Controller
     public function actionUpdate($pergeseran_id)
     {
         $model = $this->findModel($pergeseran_id);
+        $modelsDetailPergeseran = $model->detailPergeserans;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'pergeseran_id' => $model->pergeseran_id]);
+            $oldIDs = ArrayHelper::map($modelsDetailPergeseran, 'detail_pergeseran_id', 'detail_pergeseran_id');
+            $modelsDetailPergeseran = Model::createMultiple(DetailPergeseran::classname(), $modelsDetailPergeseran);
+            Model::loadMultiple($modelsDetailPergeseran, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsDetailPergeseran, 'detail_pergeseran_id', 'detail_pergeseran_id')));
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsDetailPergeseran) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        if (! empty($deletedIDs)) {
+                            DetailPergeseran::deleteAll(['detail_pergeseran_id' => $deletedIDs]);
+                        }
+                        foreach ($modelsDetailPergeseran as $modelDetailPergeseran) {
+                            $modelDetailPergeseran->pergeseran_id = $model->_pergeseranid;
+                            if (! ($flag = $modelDetailPergeseran->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['pergeseran/index']);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'modelsDetailPergeseran' => (empty($modelsDetailPergeseran)) ? [new DetailPergeseran] : $modelsDetailPergeseran
         ]);
     }
 

@@ -117,7 +117,7 @@ use yii\helpers\ArrayHelper;
                         ?>
                     </td>
                     <td>
-                        <?= $form->field($modelDetailPergeseran, "[{$i}]harga_belanja")->label(false)->textInput(['maxlength' => true, 'id' => 'harga-belanja']); ?>
+                        <?= $form->field($modelDetailPergeseran, "[{$i}]harga_belanja")->label(false)->textInput(['maxlength' => true]); ?>
                     </td>
                     <td>
                         <?= $form->field($modelDetailPergeseran, "[{$i}]jumlah_belanja")->label(false)->textInput(['maxlength' => true]); ?>
