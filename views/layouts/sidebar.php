@@ -51,7 +51,6 @@
                         'icon' => 'tasks',
                         'items' => [
                             ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'angle-right'],
-                            ['label' => 'Detail Pergeseran', 'url' => ['/detail-pergeseran/index'], 'icon' => 'angle-right'],
                             ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'angle-right'],
                             ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
                         ]
