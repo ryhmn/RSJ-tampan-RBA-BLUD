@@ -49,11 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'header' => 'Keterangan',
-                        'value' => 'keterangan'
+                        'value' => 'keterangan',
+                        'headerOptions' => ['style' => 'width: 50%']
                     ],
                     [
                         'header' => 'Status',
-                        'value' => 'status'
+                        'value' => 'status',
+                        'contentOptions' => ['style' => 'text-transform: capitalize']
                     ],
                     [
                         'class' => ActionColumn::className(),
