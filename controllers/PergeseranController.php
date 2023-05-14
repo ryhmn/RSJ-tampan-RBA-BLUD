@@ -125,7 +125,7 @@ class PergeseranController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             $oldIDs = ArrayHelper::map($modelsDetailPergeseran, 'detail_pergeseran_id', 'detail_pergeseran_id');
-            $modelsDetailPergeseran = Model::createMultiple(DetailPergeseran::classname(), $modelsDetailPergeseran);
+            $modelsDetailPergeseran = Model::createMultiple(DetailPergeseran::classname());
             Model::loadMultiple($modelsDetailPergeseran, Yii::$app->request->post());
             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsDetailPergeseran, 'detail_pergeseran_id', 'detail_pergeseran_id')));
 
