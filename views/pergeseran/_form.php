@@ -25,7 +25,7 @@ use yii\helpers\ArrayHelper;
                 $cur_rba = $rba->rba_tahun;
                 echo Html::input('text', 'rba_id', $cur_rba, $options = ['class' => 'form-control', 'maxlength' => true, 'disabled' => true]); 
                 echo $form->field($model, 'rba_id')->textInput(['value' => $rba->rba_id, 'maxlength' => true, 'class' => 'd-none'])->label(false); 
-                ?>
+            ?>
             <?php 
                 $cur_date = date("Y");
                 $rba = Rba::find()->where(['rba_tahun' => $cur_date])->one();
@@ -43,11 +43,11 @@ use yii\helpers\ArrayHelper;
                     'autoclose' => true,
                     'format' => 'yyyy/mm/dd'
                 ]
-            ])->label("Tanggal Pergeseran<span class='text-danger'>*</span>", ['class' => 'font-weight-normal text-muted']); ?>
+            ])->label("Tanggal Pergeseran<span class='text-danger'>*</span>", ['class' => 'font-weight-normal']); ?>
         </div>
     </div>
 
-    <?= $form->field($model, 'keterangan')->textarea(['rows' => 6, 'maxlength' => true])->label("Keterangan<span class='text-danger'>*</span>", ['class' => 'font-weight-normal text-muted']); ?>
+    <?= $form->field($model, 'keterangan')->textarea(['rows' => 6, 'maxlength' => true])->label("Keterangan<span class='text-danger'>*</span>", ['class' => 'font-weight-normal']); ?>
 
     <?php
         $data = array("final" => "Final", "belum final" => "Belum Final");
@@ -55,12 +55,12 @@ use yii\helpers\ArrayHelper;
         echo $form->field($model, 'status')->widget(Select2::classname(), [
             'data' => $data,
             'options' => [
-                'placeholder' => 'Pilih Bidang'
+                'placeholder' => 'Pilih Status'
             ],
             'pluginOptions' => [
                 'allowClear' => true
             ]
-        ])->label("Status Pergeseran<span class='text-danger'>*</span>", ['class' => 'font-weight-normal text-muted']);
+        ])->label("Status Pergeseran<span class='text-danger'>*</span>", ['class' => 'font-weight-normal']);
     ?>
 
     <?php DynamicFormWidget::begin([
@@ -85,9 +85,9 @@ use yii\helpers\ArrayHelper;
         <thead>
             <tr>
                 <th>Nama Item</th>
-                <th>Harga Belanja</th>
-                <th>Jumlah Belanja</th>
-                <th>Satuan</th>
+                <th style="width: 20%">Harga Belanja</th>
+                <th style="width: 20%">Jumlah Belanja</th>
+                <th style="width: 20%">Satuan</th>
                 <th class="text-center" style="width: 90px;">
                     <button type="button" class="add-item btn btn-success btn-xs"><span class="fa fa-plus"></span></button>
                 </th>
@@ -108,7 +108,7 @@ use yii\helpers\ArrayHelper;
                             echo $form->field($modelDetailPergeseran, "[{$i}]detail_belanja_id")->widget(Select2::classname(), [
                                 'data' => ArrayHelper::map($item, 'detail_belanja_id', function($item){return $item->item->nama_item;}),
                                 'options' => [
-                                    'placeholder' => 'Pilih Item'
+                                    'placeholder' => 'Pilih Item',
                                 ],
                                 'pluginOptions' => [
                                     'allowClear' => true
@@ -117,7 +117,15 @@ use yii\helpers\ArrayHelper;
                         ?>
                     </td>
                     <td>
-                        <?= $form->field($modelDetailPergeseran, "[{$i}]harga_belanja")->label(false)->textInput(['maxlength' => true]); ?>
+                        <?= $form->field($modelDetailPergeseran, "[{$i}]harga_belanja", [
+                            'inputTemplate' => '
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text font-weight-bold">Rp.</div>
+                                    </div>
+                                    {input}
+                                </div>'
+                        ])->label(false)->textInput(['maxlength' => true]); ?>
                     </td>
                     <td>
                         <?= $form->field($modelDetailPergeseran, "[{$i}]jumlah_belanja")->label(false)->textInput(['maxlength' => true]); ?>

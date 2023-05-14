@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="input-group d-flex mt-3">
-        <?= $form->field($model, 'username')->textInput(['placeholder' => "Cari User",'class' => 'border rounded-left h-100 px-3 ml-3'])->label(false); ?>
+        <?= $form->field($model, 'username')->textInput(['placeholder' => "Cari User", 'class' => 'border rounded-left h-100 px-3 ml-3'])->label(false); ?>
         <div class="form-group input-group-append align-self-center">
             <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'btn btn-light border']); ?>
         </div>

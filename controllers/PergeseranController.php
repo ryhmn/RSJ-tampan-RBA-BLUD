@@ -141,7 +141,7 @@ class PergeseranController extends Controller
                             DetailPergeseran::deleteAll(['detail_pergeseran_id' => $deletedIDs]);
                         }
                         foreach ($modelsDetailPergeseran as $modelDetailPergeseran) {
-                            $modelDetailPergeseran->pergeseran_id = $model->_pergeseranid;
+                            $modelDetailPergeseran->pergeseran_id = $model->pergeseran_id;
                             if (! ($flag = $modelDetailPergeseran->save(false))) {
                                 $transaction->rollBack();
                                 break;

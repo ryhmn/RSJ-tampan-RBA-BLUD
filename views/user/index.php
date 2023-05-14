@@ -32,19 +32,50 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
+                'layout' => '{items} {pager}',
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    'user_id',
-                    'username',
-                    'password',
-                    'bidang_id',
-                    'auth_key',
+                    [
+                        'header' => 'User ID',
+                        'value' => 'user_id',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-align: center; text-transform: capitalize;']
+                    ],
+                    [
+                        'header' => 'Username',
+                        'value' => 'username',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-align: center;']
+                    ],
+                    [
+                        'header' => 'Nama Bidang',
+                        'value' => 'bidang.nama_bidang',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-align: center; text-transform: capitalize;']
+                    ],
                     [
                         'class' => ActionColumn::className(),
-                        'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'user_id' => $model->user_id]);
-                        }
+                        'template' => '{edit} {delete}',
+                        'contentOptions' => ['style' => 'text-align: center;'],
+                        'buttons' => [
+                            'edit' => function($url, $model) {
+                                $url = Url::to(['edit', 'user_id' => $model->user_id]);
+                                return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
+                                    'title' => "Edit",
+                                    'class' => 'btn btn-primary'
+                                ]);
+                            },
+                            'delete' => function($url, $model) {
+                                $url = Url::to(['delete', 'user_id' => $model->user_id]);
+                                return Html::a('<i class="fas fa-trash-alt"></i>', $url, [
+                                    'title' => "Hapus",
+                                    'data-confirm' => Yii::t('yii', 'Ingin menghapus data?'),
+                                    'data-method' => 'post',
+                                    'class' => 'btn btn-danger ml-1'
+                                ]);
+                            }
+                        ],
                     ],
                 ],
             ]); ?>

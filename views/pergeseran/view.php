@@ -63,10 +63,10 @@ $status = $model->status;
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Nama Barang</th>
-                        <th>Harga</th>
-                        <th>Jumlah Barang</th>
-                        <th>Satuan</th>
+                        <th class="text-center">Nama Barang</th>
+                        <th class="text-center">Harga</th>
+                        <th class="text-center">Jumlah Barang</th>
+                        <th class="text-center">Satuan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,9 +77,21 @@ $status = $model->status;
                     ?>
                     <tr>
                         <td class="text-capitalize"><?= $det_perg->detailBelanja->item->nama_item; ?></td>
-                        <td><?= $det_perg->harga_belanja; ?></td>
-                        <td><?= $det_perg->jumlah_belanja; ?></td>
-                        <td class="text-uppercase"><?= $det_perg->satuan->nama_satuan; ?></td>
+                        <td class="text-center">
+                            <?php
+                                $harga = $det_perg->harga_belanja;
+                                $harga_f = number_format($harga, '2', ',', '.');
+                                echo "Rp. ", $harga_f;
+                            ?>
+                        </td>
+                        <td class="text-center">
+                            <?php
+                                $jumlah = $det_perg->jumlah_belanja;
+                                $jumlah_bel = number_format($jumlah, '0', ',', '.');
+                                echo $jumlah_bel;
+                            ?>
+                        </td>
+                        <td class="text-uppercase text-center"><?= $det_perg->satuan->nama_satuan; ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
