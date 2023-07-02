@@ -32,7 +32,7 @@ class Belanja extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rba_id', 'jenis_belanja_id', 'pagu_indikatif'], 'required'],
+            [['jenis_belanja_id', 'pagu_indikatif'], 'required'],
             [['rba_id', 'jenis_belanja_id'], 'integer'],
             [['pagu_indikatif'], 'number'],
             [['rba_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rba::class, 'targetAttribute' => ['rba_id' => 'rba_id']],

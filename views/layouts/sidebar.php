@@ -50,8 +50,9 @@
                         'label' => 'Perencanaan',
                         'icon' => 'tasks',
                         'items' => [
+                            ['label' => 'Penganggaran', 'url' => ['/rba/index'], 'icon' => 'angle-right'],
                             ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'angle-right'],
-                            ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'angle-right'],
+                            // ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'angle-right'],
                             ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
                         ]
                     ],
@@ -79,7 +80,7 @@
                     ['label' => 'Data User', 'url' => ['/user/index'], 'icon' => 'users'],
                     ['label' => 'Data Bidang', 'url' => ['/bidang/index'], 'icon' => 'sitemap'],
                     ['label' => 'Data Satuan', 'url' => ['/satuan/index'],'icon' => 'weight'],
-                    ['label' => 'RBA', 'url' => ['/rba/index'], 'icon' => 'archive'],
+                    // ['label' => 'RBA', 'url' => ['/rba/index'], 'icon' => 'archive'],
                     ['label' => 'Data Item', 'url' => ['/item/index'], 'icon' => 'pills'],
                     ['label' => 'Data Jenis Belanja', 'url' => ['/jenis-belanja/index'], 'icon' => 'tags']
                 ],

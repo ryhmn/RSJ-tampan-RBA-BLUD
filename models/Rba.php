@@ -75,4 +75,49 @@ class Rba extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pergeseran::class, ['rba_id' => 'rba_id']);
     }
+
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            $transaction = static::getDb()->beginTransaction();
+            try {
+                // Find the related "Belanja" records with matching "rba_id"
+                $belanjaRecords = Belanja::findAll(['rba_id' => $this->rba_id]);
+
+                foreach ($belanjaRecords as $belanjaRecord) {
+                    // Find the related "DetailBelanja" records with matching "belanja_id"
+                    $detailBelanjaRecords = DetailBelanja::findAll(['belanja_id' => $belanjaRecord->belanja_id]);
+
+                    foreach ($detailBelanjaRecords as $detailBelanjaRecord) {
+                        // Find the related "DetailPergeseran" records with matching "detail_belanja_id"
+                        $detailPergeseranRecords = DetailPergeseran::findAll(['detail_belanja_id' => $detailBelanjaRecord->detail_belanja_id]);
+
+                        foreach ($detailPergeseranRecords as $detailPergeseranRecord) {
+                            // Find the related "Pergeseran" record with matching "pergeseran_id"
+                            $pergeseranRecord = Pergeseran::findOne(['pergeseran_id' => $detailPergeseranRecord->pergeseran_id]);
+
+                            if ($pergeseranRecord) {
+                                // Delete the related "Pergeseran" record
+                                $pergeseranRecord->delete();
+                            }
+                        }
+
+                        // Delete the related "DetailBelanja" record
+                        $detailBelanjaRecord->delete();
+                    }
+
+                    // Delete the related "Belanja" record
+                    $belanjaRecord->delete();
+                }
+
+                $transaction->commit();
+                return true;
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            }
+        }
+
+        return false;
+    }
 }

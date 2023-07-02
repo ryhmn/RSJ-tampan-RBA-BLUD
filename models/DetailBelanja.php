@@ -112,4 +112,130 @@ class DetailBelanja extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['user_id' => 'user_id']);
     }
+
+    // Used inside action_detail_belanja_list function in detail_belanja_controller
+    // Get data from detail_belanja table or detail_pergeseran
+    public static function getDetailBelanjaList($cat_id)
+    {
+        // Counting detail_belanja records which related to detail_pergeseran table
+        $countData = self::find()
+            ->join('inner join',
+                        'detail_pergeseran',
+                        'detail_pergeseran.detail_belanja_id = detail_belanja.detail_belanja_id'
+                    )
+            ->where(['detail_pergeseran.detail_belanja_id' => $cat_id])
+            ->count();
+
+        $data = '';
+
+        // If count data <= 0 then the system will get the data from detail_belanja table
+        // Else, the system will get it from detail_pergeseran
+        if ($countData <= 0) {
+            $data = self::find()
+                ->where(['detail_belanja_id' => $cat_id])
+                ->one();
+        } else {
+            $max_id = DetailPergeseran::find()->max('pergeseran_id');
+            $data = self::find()
+                ->join('inner join',
+                        'detail_pergeseran',
+                        'detail_pergeseran.detail_belanja_id = detail_belanja.detail_belanja_id'
+                    )
+                ->where(['detail_pergeseran.detail_belanja_id' => $cat_id, 'detail_pergeseran.pergeseran_id' => $max_id])
+                ->select(['detail_pergeseran.harga_satuan', 'detail_pergeseran.jumlah_belanja'])
+                ->one();
+        }
+
+        return $data;
+    }
+
+    // Used inside action_dpd_detail_belanja in detail_belanja_controller
+    public static function getDpdDetailBelanja($cat_id)
+    {
+        // Counting data by relations of detail_pergeseran, pergeseran, and item tables based on rba_id
+        $countData = self::find()
+                ->join('inner join',
+                        'detail_pergeseran',
+                        'detail_pergeseran.detail_belanja_id = detail_belanja.detail_belanja_id'
+                    )
+                ->join('inner join',
+                        'pergeseran',
+                        'pergeseran.pergeseran_id = detail_pergeseran.pergeseran_id'
+                    )
+                ->join('inner join',
+                        'item',
+                        'item.item_id = detail_belanja.item_id'
+                    )
+                ->where(['pergeseran.rba_id' => $cat_id])
+                ->count();
+
+        $data = '';
+
+        // If counted data <= 0 then the system get the data from detail_belanja table
+        // Else, will get the data from detail_pergeseran
+        if ($countData <= 0) {
+            $data = self::find()
+                ->join('inner join',
+                        'belanja',
+                        'belanja.belanja_id = detail_belanja.belanja_id'
+                    )
+                ->join('inner join',
+                        'item',
+                        'item.item_id = detail_belanja.item_id'
+                    )
+                ->where(['belanja.rba_id' => $cat_id])
+                ->all();
+        } else {
+            $max_id = DetailPergeseran::find()->max('pergeseran_id');
+            $data = self::find()
+                ->join('inner join',
+                        'detail_pergeseran',
+                        'detail_pergeseran.detail_belanja_id = detail_belanja.detail_belanja_id'
+                    )
+                ->join('inner join',
+                        'pergeseran',
+                        'pergeseran.pergeseran_id = detail_pergeseran.pergeseran_id'
+                    )
+                ->join('inner join',
+                        'item',
+                        'item.item_id = detail_belanja.item_id'
+                    )
+                ->where(['pergeseran.rba_id' => $cat_id, 'detail_pergeseran.pergeseran_id' => $max_id])
+                ->select(['detail_pergeseran.*'])
+                ->all();
+        }
+
+        return $data;
+    }
+
+    // Used to get satuan data list after selected an item
+    public static function getDetailBelanjaSatuan($cat_id)
+    {
+        $data = self::find()
+            ->join('inner join',
+                    'satuan',
+                    'satuan.satuan_id = detail_belanja.satuan_id'
+                )
+            ->where(['detail_belanja.detail_belanja_id' => $cat_id])
+            ->select(['detail_belanja.satuan_id AS id', 'satuan.nama_satuan AS name'])
+            ->asArray()
+            ->all();
+
+        return $data;
+    }
+
+    // Used to get selected satuan in update form
+    public static function getDetailBelanjaSatuanUpdate($cat_id)
+    {
+        $data = self::find()
+            ->join('inner join',
+                    'satuan',
+                    'satuan.satuan_id = detail_belanja.satuan_id'
+                )
+            ->where(['detail_belanja.detail_belanja_id' => $cat_id])
+            ->indexBy('id')
+            ->all();
+
+        return $data;
+    }
 }

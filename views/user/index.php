@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'layout' => '{items} {pager}',
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
                     [
                         'header' => 'User ID',
                         'value' => 'user_id',

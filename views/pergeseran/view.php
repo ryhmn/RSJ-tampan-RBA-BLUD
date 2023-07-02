@@ -13,6 +13,8 @@ use yii\widgets\DetailView;
 
 \yii\web\YiiAsset::register($this);
 
+$this->title = "Pergeseran";
+
 $rba = $model->rba->rba_tahun;
 $tgl_perg = $model->tanggal_pergeseran;
 $ket = $model->keterangan;
@@ -26,7 +28,7 @@ $status = $model->status;
                 <div class="text-muted rounded py-2 px-3 my-auto pr-5" style="border-left: 4px solid #28a745;">
                     <table class="mr-5">
                         <tr>
-                            <td class="py-1">RBA</td>
+                            <td class="py-1">Tahun RBA</td>
                             <td class="px-2">:</td>
                             <td><?= $rba ?></td>
                         </tr>
@@ -76,10 +78,10 @@ $status = $model->status;
                         foreach ($detail_perg as $det_perg):
                     ?>
                     <tr>
-                        <td class="text-capitalize"><?= $det_perg->detailBelanja->item->nama_item; ?></td>
+                        <td class="text-capitalize"><?= $det_perg->item->nama_item; ?></td>
                         <td class="text-center">
                             <?php
-                                $harga = $det_perg->harga_belanja;
+                                $harga = $det_perg->harga_satuan;
                                 $harga_f = number_format($harga, '2', ',', '.');
                                 echo "Rp. ", $harga_f;
                             ?>

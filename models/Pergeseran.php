@@ -73,4 +73,140 @@ class Pergeseran extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Rba::class, ['rba_id' => 'rba_id']);
     }
+
+    public function beforeDelete()
+    {
+        // if (parent::beforeDelete()) {
+        //     $transaction = static::getDb()->beginTransaction();
+        //     try {
+        //         // Find the related "Belanja" records with matching "rba_id"
+        //         $belanjaRecords = Belanja::findAll(['rba_id' => $this->rba_id]);
+
+        //         foreach ($belanjaRecords as $belanjaRecord) {
+        //             // Find the related "DetailBelanja" records with matching "belanja_id"
+        //             $detailBelanjaRecords = DetailBelanja::findAll(['belanja_id' => $belanjaRecord->belanja_id]);
+
+        //             foreach ($detailBelanjaRecords as $detailBelanjaRecord) {
+        //                 // Find the related "DetailPergeseran" records with matching "detail_belanja_id"
+        //                 $detailPergeseranRecords = DetailPergeseran::findAll(['detail_belanja_id' => $detailBelanjaRecord->detail_belanja_id]);
+
+        //                 foreach ($detailPergeseranRecords as $detailPergeseranRecord) {
+        //                     // Delete the related "DetailPergeseran" record
+        //                     $detailPergeseranRecord->delete();
+        //                 }
+
+        //                 // Delete the related "DetailBelanja" record
+        //                 $detailBelanjaRecord->delete();
+        //             }
+
+        //             // Delete the related "Belanja" record
+        //             $belanjaRecord->delete();
+        //         }
+
+        //         $transaction->commit();
+        //         return true;
+        //     } catch (\Exception $e) {
+        //         $transaction->rollBack();
+        //         throw $e;
+        //     }
+        // }
+
+        // return false;
+
+
+        // if (parent::beforeDelete()) {
+        //     $transaction = static::getDb()->beginTransaction();
+        //     try {
+        //         // Find the related "Belanja" records with matching "rba_id"
+        //         $belanjaRecords = Belanja::findAll(['rba_id' => $this->rba_id]);
+
+        //         foreach ($belanjaRecords as $belanjaRecord) {
+        //             // Find the related "DetailBelanja" records with matching "belanja_id"
+        //             $detailBelanjaRecords = DetailBelanja::findAll(['belanja_id' => $belanjaRecord->belanja_id]);
+
+        //             foreach ($detailBelanjaRecords as $detailBelanjaRecord) {
+        //                 // Find the related "DetailPergeseran" records with matching "detail_belanja_id"
+        //                 $detailPergeseranRecords = DetailPergeseran::findAll(['detail_belanja_id' => $detailBelanjaRecord->detail_belanja_id]);
+
+        //                 foreach ($detailPergeseranRecords as $detailPergeseranRecord) {
+        //                     // Delete the related "DetailPergeseran" record
+        //                     $detailPergeseranRecord->delete();
+        //                 }
+
+        //                 // Delete the related "DetailBelanja" record
+        //                 // $detailBelanjaRecord->delete();
+        //             }
+
+        //             // Delete the related "Belanja" record
+        //             // $belanjaRecord->delete();
+        //         }
+
+        //         $transaction->commit();
+        //         return true;
+        //     } catch (\Exception $e) {
+        //         $transaction->rollBack();
+        //         throw $e;
+        //     }
+        // }
+
+        // return false;
+
+        // if (parent::beforeDelete()) {
+        //     $transaction = static::getDb()->beginTransaction();
+        //     try {
+        //         // Find the related "DetailPergeseran" record with the specified "detail_pergeseran_id"
+        //         $detailPergeseranRecord = DetailPergeseran::findOne(['detail_pergeseran_id' => $this->detail_pergeseran_id]);
+
+        //         if ($detailPergeseranRecord !== null) {
+        //             // Find the related "DetailBelanja" record with matching "detail_belanja_id"
+        //             $detailBelanjaRecord = DetailBelanja::findOne(['detail_belanja_id' => $detailPergeseranRecord->detail_belanja_id]);
+
+        //             if ($detailBelanjaRecord !== null) {
+        //                 // Find the related "Belanja" record with matching "belanja_id"
+        //                 $belanjaRecord = Belanja::findOne(['belanja_id' => $detailBelanjaRecord->belanja_id]);
+
+        //                 if ($belanjaRecord !== null) {
+        //                     // Delete the related "DetailPergeseran" record
+        //                     $detailPergeseranRecord->delete();
+
+        //                     // Delete the related "DetailBelanja" record
+        //                     // $detailBelanjaRecord->delete();
+
+        //                     // Delete the related "Belanja" record
+        //                     // $belanjaRecord->delete();
+        //                 }
+        //             }
+        //         }
+
+        //         $transaction->commit();
+        //         return true;
+        //     } catch (\Exception $e) {
+        //         $transaction->rollBack();
+        //         throw $e;
+        //     }
+        // }
+
+        // return false;
+
+        if (parent::beforeDelete()) {
+            $transaction = static::getDb()->beginTransaction();
+            try {
+                // Find the related "DetailPergeseran" records with matching "pergeseran_id"
+                $detailPergeseranRecords = DetailPergeseran::findAll(['pergeseran_id' => $this->pergeseran_id]);
+
+                foreach ($detailPergeseranRecords as $detailPergeseranRecord) {
+                    // Delete the related "DetailPergeseran" record
+                    $detailPergeseranRecord->delete();
+                }
+
+                $transaction->commit();
+                return true;
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            }
+        }
+
+        return false;
+    }
 }

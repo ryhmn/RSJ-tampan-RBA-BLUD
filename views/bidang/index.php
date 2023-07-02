@@ -31,11 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
+                'layout' => '{items} {pager}',
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
-                    'bidang_id',
-                    'nama_bidang',
+                    [
+                        'header' => 'Nama Bidang',
+                        'value' => 'nama_bidang',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-transform: capitalize;']
+                    ],
                     [
                         'class' => ActionColumn::className(),
                         'urlCreator' => function ($action, Bidang $model, $key, $index, $column) {

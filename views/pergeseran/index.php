@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap4\Breadcrumbs;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -21,14 +22,30 @@ $this->params['breadcrumbs'][] = $this->title;
                     <i class="nav-icon fas fa-tasks pr-2"></i>
                     <?= Html::encode($this->title); ?>
                 </h4>
-                <p class="ml-auto my-auto">
-                    <?= Html::a('<i class="fas fa-plus mr-1"></i> Tambah Pergeseran', ['create'], ['class' => 'btn btn-success']) ?>
-                </p>
+                <div class="ml-auto">
+                    <?php
+                        echo Breadcrumbs::widget([
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                            'options' => [
+                                'class' => 'breadcrumb my-auto'
+                            ]
+                        ]);
+                    ?>
+                </div>
             </div>
 
-            <hr class="mb-5 mt-0">
+            <hr class="mb-4 mt-0">
             
-            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+            <div class="row d-flex">
+                <div class="col-6">
+                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                </div>
+                <div class="col-6">
+                    <p class="text-right my-3">
+                        <?= Html::a('<i class="fas fa-plus mr-1"></i> Tambah Pergeseran', ['create'], ['class' => 'btn btn-success']) ?>
+                    </p>
+                </div>
+            </div>
         
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -36,19 +53,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     [
-                        'header' => 'Tahun RBA',
+                        'header' => 'Tahun Anggaran',
                         'value' => 'rba.rba_tahun',
-                        'contentOptions' => ['style' => 'text-align: center;']
+                        'contentOptions' => ['style' => 'text-align: center;'],
+                        'headerOptions' => ['style' => 'width: 10%; text-align: center;']
                     ],
                     [
                         'header' => 'Tanggal Pergeseran',
                         'value' => 'tanggal_pergeseran',
-                        'contentOptions' => ['style' => 'text-align: center;']
+                        'contentOptions' => ['style' => 'text-align: center;'],
+                        'headerOptions' => ['style' => 'width: 10%; text-align: center;']
                     ],
                     [
                         'header' => 'Keterangan',
                         'value' => 'keterangan',
-                        'headerOptions' => ['style' => 'width: 50%; text-align: center;']
+                        'headerOptions' => ['style' => 'width: 55%; text-align: center;']
                     ],
                     [
                         'header' => 'Status',

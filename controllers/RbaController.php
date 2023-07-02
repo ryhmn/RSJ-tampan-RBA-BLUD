@@ -1,12 +1,16 @@
 <?php
-
 namespace app\controllers;
 
+use app\models\Belanja;
+use app\models\Model;
 use app\models\Rba;
 use app\models\RbaSearch;
+use Exception;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * RbaController implements the CRUD actions for Rba model.
@@ -65,20 +69,45 @@ class RbaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
+
+    //  This create function is fitted with dynamic form actionCreate
     public function actionCreate()
     {
         $model = new Rba();
+        $modelsBelanja = [new Belanja];
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'rba_id' => $model->rba_id]);
+        if ($model->load($this->request->post()) && $model->save()) {
+            $modelsBelanja = Model::createMultiple(Belanja::classname());
+            Model::loadMultiple($modelsBelanja, Yii::$app->request->post());
+
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsBelanja) && $valid;
+            
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($modelsBelanja as $modelBelanja) {
+                            $modelBelanja->rba_id = $model->rba_id;
+                            if (! ($flag = $modelBelanja->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['rba/index']);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
             'model' => $model,
+            'modelsBelanja' => (empty($modelsBelanja)) ? [new Belanja] : $modelsBelanja
         ]);
     }
 
@@ -89,16 +118,50 @@ class RbaController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    //  This update function is fitted with dynamic form actionUpdate 
     public function actionUpdate($rba_id)
     {
         $model = $this->findModel($rba_id);
+        $modelsBelanja = $model->belanjas;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'rba_id' => $model->rba_id]);
+            $oldIDs = ArrayHelper::map($modelsBelanja, 'belanja_id', 'belanja_id');
+            $modelsBelanja = Model::createMultiple(Belanja::classname());
+            Model::loadMultiple($modelsBelanja, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsBelanja, 'belanja_id', 'belanja_id')));
+
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsBelanja) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        if (! empty($deletedIDs)) {
+                            Belanja::deleteAll(['belanja_id' => $deletedIDs]);
+                        }
+                        foreach ($modelsBelanja as $modelBelanja) {
+                            $modelBelanja->rba_id = $model->rba_id;
+                            if (! ($flag = $modelBelanja->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['rba/index']);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'modelsBelanja' => (empty($modelsBelanja)) ? [new Belanja] : $modelsBelanja
         ]);
     }
 

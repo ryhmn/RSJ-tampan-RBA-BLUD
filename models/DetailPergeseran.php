@@ -10,7 +10,7 @@ use Yii;
  * @property int $detail_pergeseran_id
  * @property int $pergeseran_id
  * @property int $detail_belanja_id
- * @property float $harga_belanja
+ * @property float $harga_satuan
  * @property int $jumlah_belanja
  * @property int $satuan_id
  *
@@ -34,12 +34,13 @@ class DetailPergeseran extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['harga_belanja', 'jumlah_belanja', 'satuan_id'], 'required'],
-            [['pergeseran_id', 'detail_belanja_id', 'jumlah_belanja', 'satuan_id'], 'integer'],
-            [['harga_belanja'], 'number'],
+            [['harga_satuan', 'jumlah_belanja', 'satuan_id'], 'required'],
+            [['pergeseran_id', 'item_id', 'detail_belanja_id', 'jumlah_belanja', 'satuan_id'], 'integer'],
+            [['harga_satuan'], 'number'],
             [['satuan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Satuan::class, 'targetAttribute' => ['satuan_id' => 'satuan_id']],
             [['detail_belanja_id'], 'exist', 'skipOnError' => true, 'targetClass' => DetailBelanja::class, 'targetAttribute' => ['detail_belanja_id' => 'detail_belanja_id']],
             [['pergeseran_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pergeseran::class, 'targetAttribute' => ['pergeseran_id' => 'pergeseran_id']],
+            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::class, 'targetAttribute' => ['item_id' => 'item_id']],
         ];
     }
 
@@ -52,9 +53,10 @@ class DetailPergeseran extends \yii\db\ActiveRecord
             'detail_pergeseran_id' => 'Detail Pergeseran ID',
             'pergeseran_id' => 'Pergeseran ID',
             'detail_belanja_id' => 'Detail Belanja ID',
-            'harga_belanja' => 'Harga Belanja',
+            'harga_satuan' => 'Harga Belanja',
             'jumlah_belanja' => 'Jumlah Belanja',
             'satuan_id' => 'Satuan ID',
+            'item_id' => 'Item ID',
         ];
     }
 
@@ -86,5 +88,15 @@ class DetailPergeseran extends \yii\db\ActiveRecord
     public function getSatuan()
     {
         return $this->hasOne(Satuan::class, ['satuan_id' => 'satuan_id']);
+    }
+
+    /**
+     * Gets query for [[Item]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItem()
+    {
+        return $this->hasOne(Item::class, ['item_id' => 'item_id']);
     }
 }

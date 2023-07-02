@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'detail_belanja_id')->textInput() ?>
 
-    <?= $form->field($model, 'harga_belanja')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'harga_satuan')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'jumlah_belanja')->textInput() ?>
 

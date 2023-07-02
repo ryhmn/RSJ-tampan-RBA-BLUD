@@ -48,6 +48,12 @@ $config = [
             'rules' => [
             ],
         ],
+        'formatter' => [
+            'class' => 'yii\i18n\formatter',
+            'thousandSeparator' => '.',
+            'decimalSeparator' => ',',
+            'currencyCode' => 'Rp.'
+        ],
         // 'session' => [
         //     'class' => 'yii\web\Session',
         //     'cookieParams' => [

@@ -1,12 +1,13 @@
 <?php
-
 namespace app\controllers;
 
 use app\models\DetailBelanja;
 use app\models\DetailBelanjaSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * DetailBelanjaController implements the CRUD actions for DetailBelanja model.
@@ -130,5 +131,44 @@ class DetailBelanjaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    // Used in pergeseran _form to get harga_satuan and jumlah_belanja
+    public function actionDetailBelanjaList($id)
+    {
+        $d_belanja = DetailBelanja::getDetailBelanjaList($id);
+        echo Json::encode($d_belanja);
+    }
+
+    // Used in detail_belanja to filter detail belanja based on rba_tahun
+    public function actionDpdDetailBelanja() 
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $cat_id = $parents[0];
+                $out = DetailBelanja::getDpdDetailBelanja($cat_id);
+                return ['output' => $out, 'selected' => ''];
+            }
+        }
+        return ['output' => '', 'selected' => ''];
+    }
+
+    // To get satuan automatically after selected the first item field
+    public function actionDpdDetailBelanjaSatuan() 
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $cat_id = $parents[0];
+                $out = DetailBelanja::getDetailBelanjaSatuan($cat_id);
+                return ['output' => $out, 'selected' => $out];
+            }
+        }
+        return ['output' => '', 'selected' => ''];
     }
 }

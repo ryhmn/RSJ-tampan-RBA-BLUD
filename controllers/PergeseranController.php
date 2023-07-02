@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use app\models\DetailPergeseran;
@@ -70,6 +69,8 @@ class PergeseranController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
+
+     //  This create function is fitted with dynamic form actionCreate 
     public function actionCreate()
     {
         $model = new Pergeseran();
@@ -79,7 +80,6 @@ class PergeseranController extends Controller
             $modelsDetailPergeseran = Model::createMultiple(DetailPergeseran::classname());
             Model::loadMultiple($modelsDetailPergeseran, Yii::$app->request->post());
 
-        // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($modelsDetailPergeseran) && $valid;
             
@@ -118,6 +118,8 @@ class PergeseranController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+     //  This update function is fitted with dynamic form actionUpdate 
     public function actionUpdate($pergeseran_id)
     {
         $model = $this->findModel($pergeseran_id);
@@ -129,7 +131,6 @@ class PergeseranController extends Controller
             Model::loadMultiple($modelsDetailPergeseran, Yii::$app->request->post());
             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsDetailPergeseran, 'detail_pergeseran_id', 'detail_pergeseran_id')));
 
-            // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($modelsDetailPergeseran) && $valid;
 
