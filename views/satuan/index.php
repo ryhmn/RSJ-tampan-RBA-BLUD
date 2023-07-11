@@ -13,6 +13,7 @@ use yii\grid\GridView;
 $this->title = 'Satuan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="satuan-index px-3">
     <div class="card">
         <div class="card-body">
@@ -42,9 +43,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'class' => ActionColumn::className(),
-                        'urlCreator' => function ($action, Satuan $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'satuan_id' => $model->satuan_id]);
-                        }
+                        'template' => '{update} {delete}',
+                        'contentOptions' => ['style' => 'text-align: center;'],
+                        'buttons' => [
+                            'update' => function($url, $model) {
+                                $url = Url::to(['update', 'satuan_id' => $model->satuan_id]);
+                                return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
+                                    'title' => "Edit",
+                                    'class' => 'btn btn-primary'
+                                ]);
+                            },
+                            'delete' => function($url, $model) {
+                                $url = Url::to(['delete', 'satuan_id' => $model->satuan_id]);
+                                return Html::a('<i class="fas fa-trash-alt"></i>', $url, [
+                                    'title' => "Hapus",
+                                    'data-confirm' => Yii::t('yii', 'Ingin menghapus data?'),
+                                    'data-method' => 'post',
+                                    'class' => 'btn btn-danger ml-1'
+                                ]);
+                            }
+                        ],
                     ],
                 ],
             ]); ?>

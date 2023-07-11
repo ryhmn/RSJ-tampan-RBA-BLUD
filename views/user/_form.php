@@ -13,10 +13,13 @@ use kartik\select2\Select2;
 
     <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'crud-user-form']) ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Username'])->label(false) ?>
+    <label>Username</label>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Username Bidang'])->label(false) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Password'])->label(false) ?>
+    <label>Password</label>
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Password Bidang'])->label(false) ?>
 
+    <label>Bidang</label>
     <?php
         $bidang = Bidang::find()->all();
         echo $form->field($model, 'bidang_id')->widget(Select2::classname(), [

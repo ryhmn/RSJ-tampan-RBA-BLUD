@@ -21,13 +21,16 @@ use yii\helpers\Html;
         <li class="nav-item">
             <a href="javascript:void(0)" class="nav-link">
                 <?php
-                setlocale(LC_TIME, 'id_ID', 'id', 'idn');
-                $date = date('Y-m-d');
-                $indonesian_date = strftime('%A, %d %B %Y', strtotime($date));
-                
-                echo $indonesian_date;
-                ?>
+                    setlocale(LC_TIME, 'id_ID', 'id', 'idn');
+                    $date = date('Y-m-d');
+                    $indonesian_date = strftime('%A, %d %B %Y', strtotime($date));
+                    
+                    echo $indonesian_date;
+                    ?>
             </a>
+        </li>
+        <li class="nav-item my-2 bg-danger px-2 rounded py-1">
+            <?php echo Html::a('<i class="fas fa-sign-out-alt"></i>', ['site/logout'], ['data-method' => 'post']);?>
         </li>
     </ul>
 </nav>

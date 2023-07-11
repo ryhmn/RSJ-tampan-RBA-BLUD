@@ -6,14 +6,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\RbaSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="rba-search">
+<div class="site-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        // 'action' => ['/site/index/'],
         'method' => 'get',
     ]); ?>
 

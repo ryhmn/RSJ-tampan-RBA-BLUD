@@ -72,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'header' => 'Status',
                         'value' => 'status',
+                        'headerOptions' => ['style' => 'width: 5%; text-align: center;'],
                         'contentOptions' => ['style' => 'text-transform: capitalize; text-align: center;']
                     ],
                     [

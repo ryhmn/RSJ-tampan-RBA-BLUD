@@ -36,12 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     [
-                        'header' => 'User ID',
-                        'value' => 'user_id',
-                        'headerOptions' => ['style' => 'text-align: center;'],
-                        'contentOptions' => ['style' => 'text-align: center; text-transform: capitalize;']
-                    ],
-                    [
                         'header' => 'Username',
                         'value' => 'username',
                         'headerOptions' => ['style' => 'text-align: center;'],
@@ -55,11 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'class' => ActionColumn::className(),
-                        'template' => '{edit} {delete}',
+                        'template' => '{update} {delete}',
                         'contentOptions' => ['style' => 'text-align: center;'],
                         'buttons' => [
-                            'edit' => function($url, $model) {
-                                $url = Url::to(['edit', 'user_id' => $model->user_id]);
+                            'update' => function($url, $model) {
+                                $url = Url::to(['update', 'user_id' => $model->user_id]);
                                 return Html::a('<i class="fas fa-pencil-alt"></i>', $url, [
                                     'title' => "Edit",
                                     'class' => 'btn btn-primary'
