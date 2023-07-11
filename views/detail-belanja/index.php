@@ -10,40 +10,73 @@ use yii\grid\GridView;
 /** @var app\models\DetailBelanjaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Detail Belanjas';
+$this->title = 'Detail Belanja';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="detail-belanja-index">
+<div class="detail-belanja-index px-3">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex">
+                <h4 class="text-uppercase text-muted font-weight-bold rounded py-2 px-3 my-auto" style="border-left: 4px solid #28a745">
+                    <i class="fas fa-tags"></i>
+                    <?= Html::encode($this->title); ?>
+                </h4>
+                <p class="ml-auto my-auto">
+                    <?= Html::a('<i class="fas fa-plus mr-1"></i> Tambah Detail Belanja', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
+                <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+            </div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            <hr class="mb-5 mt-0">
 
-    <p>
-        <?= Html::a('Create Detail Belanja', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'detail_belanja_id',
-            'user_id',
-            'belanja_id',
-            'item_id',
-            'jumlah_belanja',
-            //'satuan_id',
-            //'harga_satuan',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, DetailBelanja $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'detail_belanja_id' => $model->detail_belanja_id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'layout' => '{items} {pager}',
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'header' => 'Item ID',
+                        'value' => 'item_id',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-transform: capitalize;']
+                    ],
+                    [
+                        'header' => 'Jumlah Belanja',
+                        'value' => 'jumlah_belanja',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-transform: capitalize;']
+                    ],
+                    [
+                        'header' => 'Harga Satuan',
+                        'value' => 'harga_satuan',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-transform: capitalize;']
+                    ],
+                    [
+                        'class' => ActionColumn::className(),
+                        'template' => '{view} {delete}',
+                        'contentOptions' => ['style' => 'text-transform: capitalize; text-align: center;'],
+                        'buttons' => [
+                            'view' => function ($url, $model) {
+                                $url = Url::to(['view', 'detail_belanja_id' => $model->detail_belanja_id]);
+                                return Html::a('<i class="fas fa-eye"></i>', $url, [
+                                    'title' => "View",
+                                    'class' => 'btn btn-primary'
+                                ]);
+                            },
+                            'delete' => function ($url, $model) {
+                                $url = Url::to(['delete', 'detail_belanja_id' => $model->detail_belanja_id]);
+                                return Html::a('<i class="fas fa-trash-alt"></i>', $url, [
+                                    'title' => "Delete",
+                                    'data-confirm' => Yii::t('yii', 'Ingin menghapus data?'),
+                                    'data-method' => 'post',
+                                    'class' => 'btn btn-danger ml-1'
+                                ]);
+                            }
+                        ],
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>
