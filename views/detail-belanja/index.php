@@ -35,8 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     [
-                        'header' => 'Item ID',
-                        'value' => 'item_id',
+                        'header' => 'Jenis Belanja',
+                        'value' => 'belanja.jenisBelanja.jenis_belanja',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-transform: capitalize;']
+                    ],
+                    [
+                        'header' => 'Nama Item',
+                        'value' => 'item.nama_item',
                         'headerOptions' => ['style' => 'text-align: center;'],
                         'contentOptions' => ['style' => 'text-transform: capitalize;']
                     ],
@@ -47,20 +53,27 @@ $this->params['breadcrumbs'][] = $this->title;
                         'contentOptions' => ['style' => 'text-transform: capitalize;']
                     ],
                     [
-                        'header' => 'Harga Satuan',
-                        'value' => 'harga_satuan',
+                        'header' => 'Satuan',
+                        'value' => 'satuan.nama_satuan',
                         'headerOptions' => ['style' => 'text-align: center;'],
                         'contentOptions' => ['style' => 'text-transform: capitalize;']
                     ],
                     [
+                        'header' => 'Harga Satuan',
+                        'value' => 'harga_satuan',
+                        'headerOptions' => ['style' => 'text-align: center;'],
+                        'contentOptions' => ['style' => 'text-transform: capitalize;'],
+                        'format' => ['Currency']
+                    ],
+                    [
                         'class' => ActionColumn::className(),
-                        'template' => '{view} {delete}',
+                        'template' => '{update} {delete}',
                         'contentOptions' => ['style' => 'text-transform: capitalize; text-align: center;'],
                         'buttons' => [
-                            'view' => function ($url, $model) {
-                                $url = Url::to(['view', 'detail_belanja_id' => $model->detail_belanja_id]);
-                                return Html::a('<i class="fas fa-eye"></i>', $url, [
-                                    'title' => "View",
+                            'update' => function ($url, $model) {
+                                $url = Url::to(['update', 'detail_belanja_id' => $model->detail_belanja_id]);
+                                return Html::a('<i class="fas fa-edit"></i>', $url, [
+                                    'title' => "update",
                                     'class' => 'btn btn-primary'
                                 ]);
                             },

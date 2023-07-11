@@ -1,4 +1,5 @@
 <?php
+
 use app\models\DetailBelanja;
 use app\models\Item;
 use app\models\Rba;
@@ -15,7 +16,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="pergeseran-form">
-    
+
     <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
     <div class="row">
@@ -23,10 +24,10 @@ use yii\helpers\Url;
             <!-- Tahun Anggaran Field -->
             <label>Tahun Anggaran</label>
             <?php
-                $cur_date = date('Y');
-                $rba = Rba::find()->where(['rba_tahun' => $cur_date])->one();
-                echo Html::activeHiddenInput($model, 'rba_id', ['value' => $rba->rba_id]);
-                echo "<input value='$rba->rba_tahun' class='form-control' disabled/>"                
+            $cur_date = date('Y');
+            $rba = Rba::find()->where(['rba_tahun' => $cur_date])->one();
+            echo Html::activeHiddenInput($model, 'rba_id', ['value' => $rba->rba_id]);
+            echo "<input value='$rba->rba_tahun' class='form-control' disabled/>"
             ?>
         </div>
         <div class="col-6">
@@ -50,17 +51,17 @@ use yii\helpers\Url;
 
     <!-- Status Final Field -->
     <?php
-        $data = array("final" => "Final", "belum final" => "Belum Final");
+    $data = array("final" => "Final", "belum final" => "Belum Final");
 
-        echo $form->field($model, 'status')->widget(Select2::classname(), [
-            'data' => $data,
-            'options' => [
-                'placeholder' => 'Pilih Status'
-            ],
-            'pluginOptions' => [
-                'allowClear' => true
-            ]
-        ])->label("Status Pergeseran<span class='text-danger'>*</span>", ['class' => 'font-weight-normal']);
+    echo $form->field($model, 'status')->widget(Select2::classname(), [
+        'data' => $data,
+        'options' => [
+            'placeholder' => 'Pilih Status'
+        ],
+        'pluginOptions' => [
+            'allowClear' => true
+        ]
+    ])->label("Status Pergeseran<span class='text-danger'>*</span>", ['class' => 'font-weight-normal']);
     ?>
 
     <!-- Dynamic Form -->
@@ -98,29 +99,31 @@ use yii\helpers\Url;
                 </th>
             </tr>
         </thead>
-        <tbody class="container-items">            
-            <?php foreach ($modelsDetailPergeseran as $i => $modelDetailPergeseran): ?>
+        <tbody class="container-items">
+            <?php foreach ($modelsDetailPergeseran as $i => $modelDetailPergeseran) : ?>
                 <tr class="item">
                     <td class="vcenter">
                         <?php
-                            // Hidden input for detail_pergeseran_id
-                            if (! $modelDetailPergeseran->isNewRecord) {
-                                echo Html::activeHiddenInput($modelDetailPergeseran, "[{$i}]detail_pergeseran_id");
-                            }
+                        // Hidden input for detail_pergeseran_id
+                        if (!$modelDetailPergeseran->isNewRecord) {
+                            echo Html::activeHiddenInput($modelDetailPergeseran, "[{$i}]detail_pergeseran_id");
+                        }
                         ?>
                         <?php
-                            // First item Field
-                            // This field got the data from detail_belanja or the latest detail_pergeseran record
-                            echo $form->field($modelDetailPergeseran, "[{$i}]detail_belanja_id")->widget(Select2::classname(), [
-                                'data' => ArrayHelper::map(DetailBelanja::getDpdDetailBelanja($rba->rba_id), 'detail_belanja_id', function($data){return $data->item->nama_item;}),
-                                'options' => [
-                                    'placeholder' => "Pilih Item",
-                                    'class' => 'detailBelanja form-control'
-                                ],
-                                'pluginOptions' => [
-                                    'allowClear' => true,
-                                ]
-                            ])->label(false);
+                        // First item Field
+                        // This field got the data from detail_belanja or the latest detail_pergeseran record
+                        echo $form->field($modelDetailPergeseran, "[{$i}]detail_belanja_id")->widget(Select2::classname(), [
+                            'data' => ArrayHelper::map(DetailBelanja::getDpdDetailBelanja($rba->rba_id), 'detail_belanja_id', function ($data) {
+                                return $data->item->nama_item;
+                            }),
+                            'options' => [
+                                'placeholder' => "Pilih Item",
+                                'class' => 'detailBelanja form-control'
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                            ]
+                        ])->label(false);
                         ?>
                         <!-- HTML element for short detail_belanja information -->
                         <!-- Located at the bottom of item -->
@@ -129,19 +132,21 @@ use yii\helpers\Url;
                     </td>
                     <td>
                         <?php
-                            // Second item field
-                            // This field got the data from item table
-                            $item = Item::find()->all();
-                            echo $form->field($modelDetailPergeseran, "[{$i}]item_id")->widget(Select2::classname(), [
-                                'data' => ArrayHelper::map($item, 'item_id', function($item){return $item->nama_item;}),
-                                'options' => [
-                                    'placeholder' => "Pilih Item",
-                                    'class' => 'form-control'
-                                ],
-                                'pluginOptions' => [
-                                    'allowClear' => true,
-                                ]
-                            ])->label(false);
+                        // Second item field
+                        // This field got the data from item table
+                        $item = Item::find()->all();
+                        echo $form->field($modelDetailPergeseran, "[{$i}]item_id")->widget(Select2::classname(), [
+                            'data' => ArrayHelper::map($item, 'item_id', function ($item) {
+                                return $item->nama_item;
+                            }),
+                            'options' => [
+                                'placeholder' => "Pilih Item",
+                                'class' => 'form-control'
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                            ]
+                        ])->label(false);
                         ?>
                     </td>
                     <td>
@@ -162,19 +167,21 @@ use yii\helpers\Url;
                     </td>
                     <td>
                         <?php
-                            // Satuan field
-                            $satuan = DetailBelanja::find()->all();
-                            echo $form->field($modelDetailPergeseran, "[{$i}]satuan_id")->widget(DepDrop::classname(), [
-                                'data' => ArrayHelper::map(DetailBelanja::getDetailBelanjaSatuanUpdate([$modelDetailPergeseran->detail_belanja_id]), 'satuan_id', function($data){return $data->satuan->nama_satuan;}),
-                                'options' => [
-                                    'placeholder' => 'Pilih Satuan',
-                                ],
-                                'pluginOptions' => [
-                                    'allowClear' => true,
-                                    'depends' => ["detailpergeseran-{$i}-detail_belanja_id"],
-                                    'url' => Url::to(['../detail-belanja/dpd-detail-belanja-satuan'])
-                                ]
-                            ])->label(false);
+                        // Satuan field
+                        $satuan = DetailBelanja::find()->all();
+                        echo $form->field($modelDetailPergeseran, "[{$i}]satuan_id")->widget(DepDrop::classname(), [
+                            'data' => ArrayHelper::map(DetailBelanja::getDetailBelanjaSatuanUpdate([$modelDetailPergeseran->detail_belanja_id]), 'satuan_id', function ($data) {
+                                return $data->satuan->nama_satuan;
+                            }),
+                            'options' => [
+                                'placeholder' => 'Pilih Satuan',
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'depends' => ["detailpergeseran-{$i}-detail_belanja_id"],
+                                'url' => Url::to(['../detail-belanja/dpd-detail-belanja-satuan'])
+                            ]
+                        ])->label(false);
                         ?>
                     </td>
                     <td class="text-center vcenter" style="width: 90px;">
@@ -188,7 +195,7 @@ use yii\helpers\Url;
     <?php DynamicFormWidget::end(); ?>
 
     <div class="form-group mt-5 mb-1">
-        <?= Html::submitButton('<i class="fas fa-save mr-1"></i> Simpan', ['class' => 'btn btn-success px-4']) ?> 
+        <?= Html::submitButton('<i class="fas fa-save mr-1"></i> Simpan', ['class' => 'btn btn-success px-4']) ?>
     </div>
 
     <?php \yii\bootstrap4\ActiveForm::end(); ?>

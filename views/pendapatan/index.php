@@ -63,17 +63,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'header' => 'Jumlah Pendapatan',
                         'value' => 'jumlah_pendapatan',
                         'headerOptions' => ['style' => 'text-align: center;'],
-                        'contentOptions' => ['style' => 'text-align: center;']
+                        'contentOptions' => ['style' => 'text-align: center;'],
+                        'format' => ['Currency'],
                     ],
                     [
                         'class' => ActionColumn::className(),
-                        'template' => '{view} {delete}',
+                        'template' => '{update} {delete}',
                         'contentOptions' => ['style' => 'text-transform: capitalize; text-align: center;'],
                         'buttons' => [
-                            'view' => function ($url, $model) {
-                                $url = Url::to(['view', 'pendapatan_id' => $model->pendapatan_id]);
-                                return Html::a('<i class="fas fa-eye"></i>', $url, [
-                                    'title' => "View",
+                            'update' => function ($url, $model) {
+                                $url = Url::to(['update', 'pendapatan_id' => $model->pendapatan_id]);
+                                return Html::a('<i class="fas fa-edit"></i>', $url, [
+                                    'title' => "Update",
                                     'class' => 'btn btn-primary'
                                 ]);
                             },

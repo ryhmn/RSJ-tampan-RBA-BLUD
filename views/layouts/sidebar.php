@@ -42,20 +42,20 @@
                     // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     // do this to filter which menu will display to user
 
-                    ['label' => 'Developer Mode', 'header' => true],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
+                    // ['label' => 'Developer Mode', 'header' => true],
+                    // // ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
 
-                    ['label' => 'Perencanaan', 'header' => true],
-                    [
-                        'label' => 'Perencanaan',
-                        'icon' => 'tasks',
-                        'items' => [
-                            ['label' => 'Penganggaran', 'url' => ['/rba/index'], 'icon' => 'angle-right'],
-                            ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'angle-right'],
-                            // ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'angle-right'],
-                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
-                        ]
-                    ],
+                    // ['label' => 'Perencanaan', 'header' => true],
+                    // [
+                    //     'label' => 'Perencanaan',
+                    //     'icon' => 'tasks',
+                    //     'items' => [
+                    //         ['label' => 'Penganggaran', 'url' => ['/rba/index'], 'icon' => 'angle-right'],
+                    //         ['label' => 'Pergeseran', 'url' => ['/pergeseran/index'], 'icon' => 'angle-right'],
+                    //         // ['label' => 'Pagu Indikatif', 'url' => ['/belanja/index'], 'icon' => 'angle-right'],
+                    //         ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
+                    //     ]
+                    // ],
 
                     ['label' => 'Keuangan', 'header' => true],
                     [
@@ -67,14 +67,14 @@
                         ]
                     ],
 
-                    ['label' => 'Bidang', 'header' => true],
-                    [
-                        'label' => 'Bidang',
-                        'icon' => 'sitemap',
-                        'items' => [
-                            ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
-                        ]
-                    ],
+                    // ['label' => 'Bidang', 'header' => true],
+                    // [
+                    //     'label' => 'Bidang',
+                    //     'icon' => 'sitemap',
+                    //     'items' => [
+                    //         ['label' => 'Belanja', 'url' => ['/detail-belanja/index'], 'icon' => 'angle-right']
+                    //     ]
+                    // ],
 
                     ['label' => 'Admin', 'header' => true],
                     ['label' => 'Data User', 'url' => ['/user/index'], 'icon' => 'users'],
