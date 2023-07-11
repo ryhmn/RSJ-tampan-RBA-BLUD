@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <!-- <?= $form->field($model, 'parent_jenis_belanja_id')->textInput() ?> -->
+    <label>Jenis Belanja</label>
     <?php
     $jenisparent = JenisBelanja::find()->all();
     echo $form->field($model, 'parent_jenis_belanja_id')->widget(Select2::classname(), [
@@ -23,7 +24,7 @@ use yii\widgets\ActiveForm;
             return $jenisparent->jenis_belanja;
         }),
         'options' => [
-            'placeholder' => 'Pilih Jenis Parent Belanja'
+            'placeholder' => 'Pilih Jenis Belanja'
         ],
         'pluginOptions' => [
             'allowClear' => true
@@ -31,7 +32,7 @@ use yii\widgets\ActiveForm;
     ])->label(false);
     ?>
 
-    <?= $form->field($model, 'jenis_belanja')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'jenis_belanja')->textInput(['maxlength' => true])->label('Uraian') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Simpan', ['class' => 'btn btn-success']) ?>

@@ -23,11 +23,11 @@ use yii\widgets\ActiveForm;
     $cur_date = date('Y');
     $rba = Rba::find()->where(['rba_tahun' => $cur_date])->one();
     echo Html::activeHiddenInput($model, 'rba_id', ['value' => $rba->rba_id]);
-    echo "<input value='$rba->rba_tahun' class='form-control' disabled/>"
+    echo "<input value='$rba->rba_tahun' class='mb-3 form-control' disabled/>"
     ?>
     <!-- 
     <?= $form->field($model, 'parent_pendapatan_id')->textInput() ?> -->
-    <label>Parent Pendapatan</label>
+    <label>Sumber Pendapatan</label>
     <?php
     $pendapatanparent = Pendapatan::find()->all();
     echo $form->field($model, 'parent_pendapatan_id')->widget(Select2::classname(), [
@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
             return $pendapatanparent->sumber_pendapatan;
         }),
         'options' => [
-            'placeholder' => 'Pilih Parent Pendapatan'
+            'placeholder' => 'Pilih Sumber Pendapatan'
         ],
         'pluginOptions' => [
             'allowClear' => true
@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
     ])->label(false);
     ?>
 
-    <?= $form->field($model, 'sumber_pendapatan')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sumber_pendapatan')->textInput(['maxlength' => true])->label('Uraian') ?>
 
     <?= $form->field($model, 'jumlah_pendapatan')->textInput(['maxlength' => true]) ?>
 
